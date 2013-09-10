@@ -1,0 +1,15 @@
+# pypi
+/build
+/dist
+
+*.pyc
+*.egg-info
+*.egg
+
+# temp files
+docs/_build
+
+# IDEs
+.idea
+*.iml
+.project
