@@ -21,8 +21,8 @@ class PyflareTest(unittest.TestCase):
 
     @mock_response
     def test_rec_load_all(self):
-        response = self.pyflare.rec_load_all('example.com')
-        self.assertIsInstance(response['response']['recs']['count'], int)
+        for response in self.pyflare.rec_load_all('example.com'):
+            self.assertIsInstance(response['props']['cloud_on'], int)
 
     @mock_response
     def test_zone_check(self):

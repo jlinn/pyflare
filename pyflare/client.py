@@ -66,10 +66,9 @@ class Pyflare(object):
         :param zone: the domain for which records are being retrieved
         :type zone: str
         :return:
-        :rtype: dict
+        :rtype: generator
         """
         has_more = True
-        records = []
         current_count = 0
         while has_more:
             records = self._request({
