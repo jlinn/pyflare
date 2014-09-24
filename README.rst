@@ -7,7 +7,7 @@ pyflare
 About
 -----
 
-Pyflare is a Python adapter for `CloudFlare's Client API <http://www.cloudflare.com/docs/client-api.html>`_.
+Pyflare is a Python adapter for `CloudFlare's Client API <http://www.cloudflare.com/docs/client-api.html>`_ and `CloudFlare's Hosting provider API <http://www.cloudflare.com/docs/host-api.html>`_.
 
 Installation
 ------------
@@ -21,7 +21,13 @@ Usage
 
 .. code-block:: python
 
-    from pyflare import Pyflare
-    cf = Pyflare('address@example.com', 'your_api_key')
+    from pyflare import PyflareClient
+    cf = PyflareClient('address@example.com', 'your_api_key')
     # Create a new A record
     response = cf.rec_new('example.com', 'A', 'sub', '1.2.3.4')
+
+
+    from pyflare import PyflareHosting
+    hf = PyflareHosting('your_host_api_key')
+    # Authenticate a user
+    response = hf.user_auth('one@example.com', 'user_password')
