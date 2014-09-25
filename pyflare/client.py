@@ -1,17 +1,10 @@
 __author__ = 'Joe Linn'
 
 import requests
+from pyflare import APIError
 
 
-class Pyflare(object):
-    class APIError(Exception):
-        def __init__(self, msg, code=None):
-            self.msg = msg
-            self.code = code
-            Exception.__init__(self, msg, code)
-
-        def __str__(self):
-            return '{0} - {1}'.format(self.code, self.msg) if self.code is not None else self.msg
+class PyflareClient(object):
 
     CLOUDFLARE_URL = 'https://www.cloudflare.com/api_json.html'
 
@@ -509,5 +502,5 @@ class Pyflare(object):
         data['email'] = self._email
         response = requests.post(self.CLOUDFLARE_URL, data=data).json()
         if response['result'] == 'error':
-            raise self.APIError(response['msg'], response.get('err_code'))
+            raise APIError(response['msg'], response.get('err_code'))
         return response
