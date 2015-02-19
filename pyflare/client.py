@@ -70,7 +70,7 @@ class PyflareClient(object):
                 'z': zone
             })
             has_more = records['response']['recs']['has_more']
-            current_count = records['response']['recs']['count']
+            current_count += records['response']['recs']['count']
             for record in records['response']['recs']['objs']:
                 yield record
 
