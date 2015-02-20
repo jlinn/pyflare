@@ -12,7 +12,8 @@ class PyflareTest(unittest.TestCase):
     @mock_response_client
     def test_stats(self):
         response = self.pyflare.stats('example.com', 40)
-        self.assertIsInstance(response['response']['result']['timeZero'], int)
+        time_zero = response['response']['result']['timeZero']
+        self.assertTrue(isinstance(time_zero, int) or isinstance(time_zero, long))
 
     @mock_response_client
     def test_zone_load_multi(self):
