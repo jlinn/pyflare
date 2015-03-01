@@ -69,10 +69,13 @@ class PyflareClient(object):
                 'o': current_count,
                 'z': zone
             })
-            has_more = records['response']['recs']['has_more']
-            current_count += records['response']['recs']['count']
-            for record in records['response']['recs']['objs']:
-                yield record
+            try:
+                has_more = records['response']['recs']['has_more']
+                current_count += records['response']['recs']['count']
+                for record in records['response']['recs']['objs']:
+                    yield record
+            except KeyError:
+                has_more = False
 
     def zone_check(self, zones):
         """
