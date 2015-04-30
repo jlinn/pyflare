@@ -1,6 +1,7 @@
 __author__ = 'Joe Linn'
 
 import requests
+from requests.exceptions import HTTPError
 from pyflare import APIError
 
 
@@ -504,6 +505,11 @@ class PyflareClient(object):
         data['tkn'] = self._token
         data['email'] = self._email
         response = requests.post(self.CLOUDFLARE_URL, data=data).json()
-        if response['result'] == 'error':
-            raise APIError(response['msg'], response.get('err_code'))
+        if response.status_code == 422:
+            http_error = HTTPError('%s Client Error: %s' % (r.status_code, r.content.decode("utf-8")))
+            http_error.response = response
+            raise http_error
+
+        response.raise_for_status()
+
         return response
