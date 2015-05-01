@@ -525,5 +525,5 @@ class PyflareClient(object):
         except ValueError:
             raise ResponseError("Unexpected Response from Cloudflare API")
 
-    class ResponseError(ValueError):
-        """Unexpected response from CloudFlare API (Downtime etc.)"""
+class ResponseError(ValueError):
+    """Unexpected response from CloudFlare API (Downtime etc.)"""
