@@ -506,14 +506,14 @@ class PyflareClient(object):
         data['tkn'] = self._token
         data['email'] = self._email
         response = requests.post(self.CLOUDFLARE_URL, data=data)
-        import pdb
-        pdb.set_trace()
-        if response.content.get('result') == error:
+        deserialized_response = self._deserialize_response(response.content.decode("utf-8"))
+
+        if deserialized_response.content.get('result') == error:
             http_error = HTTPError('Client Error: %s' % (response.content.decode("utf-8")))
             http_error.response = response
             raise http_error
 
-        return self._deserialize_response(response.content.decode("utf-8"))
+        return deserialized_response
 
     def _deserialize_response(self, response):
         """
