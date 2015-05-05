@@ -511,7 +511,7 @@ class PyflareClient(object):
             http_error.response = response
             raise http_error
 
-        return self._deserialize_response(response)
+        return self._deserialize_response(response.content.decode("utf-8"))
 
     def _deserialize_response(self, response):
         """
