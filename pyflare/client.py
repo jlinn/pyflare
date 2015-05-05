@@ -506,14 +506,14 @@ class PyflareClient(object):
         data['tkn'] = self._token
         data['email'] = self._email
         response = requests.post(self.CLOUDFLARE_URL, data=data)
-        if response.get('result') == error:
+        if response.content.get('result') == error:
             http_error = HTTPError('Client Error: %s' % (response.content.decode("utf-8")))
             http_error.response = response
             raise http_error
 
         return self._deserialize_response(response)
 
-    def _deserialize_response(response):
+    def _deserialize_response(self, response):
         """
         :param: response: Response body returned from Cloudflare
         :return: deserialized json response if valid, else raise ResponseError
@@ -521,7 +521,7 @@ class PyflareClient(object):
         """
 
         try:
-            json.loads(response)
+            return json.loads(response)
         except ValueError:
             raise ResponseError("Unexpected Response from Cloudflare API")
 
