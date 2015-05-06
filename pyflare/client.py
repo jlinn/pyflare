@@ -509,9 +509,9 @@ class PyflareClient(object):
         deserialized_response = self._deserialize_response(response.content.decode("utf-8"))
 
         if deserialized_response.get('result') == 'error':
-            http_error = HTTPError('Client Error: %s' % deserialized_response.get('msg'))
-            http_error.response = response
-            raise http_error
+            api_error = APIError(dezerialized_response['msg'], deserialized_response['err_code'])
+            api_error.response = response
+            raise api_error
 
         return deserialized_response
 
@@ -524,8 +524,5 @@ class PyflareClient(object):
 
         try:
             return json.loads(response)
-        except ValueError:
-            raise ResponseError("Unexpected Response from Cloudflare API")
-
-class ResponseError(ValueError):
-    """Unexpected response from CloudFlare API (Downtime etc.)"""
+        except APIError:
+            raise APIError("Unexpected response from Cloudflare API")
