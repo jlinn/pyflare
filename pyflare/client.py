@@ -509,9 +509,7 @@ class PyflareClient(object):
         deserialized_response = self._deserialize_response(response.content.decode("utf-8"))
 
         if deserialized_response.get('result') == 'error':
-            api_error = APIError(dezerialized_response['msg'], deserialized_response['err_code'])
-            api_error.response = response
-            raise api_error
+            raise APIError(deserialized_response['msg'], deserialized_response['err_code'])
 
         return deserialized_response
 
