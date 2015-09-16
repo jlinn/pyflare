@@ -80,6 +80,27 @@ class PyflareHosting(object):
         }
         return self._request(params)
 
+    def full_zone_set(self, user_key, zone_name):
+        """
+        Create new zone and all subdomains for user associated with this
+        user_key.
+
+        :param    user_key:   The unique 3auth string,identifying the user's
+        CloudFlare Account. Generated from a user_create or user_auth
+        :type     user_key:   str
+        :param    zone_name:  The zone you'd like to run CNAMES through CloudFlare for, e.g. "example.com".
+        :type     zone_name:  str
+
+        :returns:
+        :rtype:   dict
+        """
+        params = {
+            'act': 'full_zone_set',
+            'user_key': user_key,
+            'zone_name': zone_name,
+        }
+        return self._request(params)
+
     def user_lookup(self, cloudflare_email=None, unique_id=None):
         """
         Lookup user data based on either his cloudflare_email or his

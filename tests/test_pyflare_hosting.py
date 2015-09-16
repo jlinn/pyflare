@@ -51,6 +51,21 @@ class PyflareTest(unittest.TestCase):
         )
 
     @mock_response_hosting
+    def test_full_zone_set(self):
+        response = self.pyflare.full_zone_set(
+            'user_key',
+            'someexample.com')
+
+        self.assertEqual(
+            response['response']['zone_name'],
+            'someexample.com'
+        )
+        self.assertEqual(
+            response['response']['jumpstart'],
+            'true'
+        )
+
+    @mock_response_hosting
     def test_user_lookup_email(self):
         response = self.pyflare.user_lookup(
             cloudflare_email='newuser@example.com')
