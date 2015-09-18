@@ -148,7 +148,7 @@ class PyflareHosting(object):
         if not (cloudflare_email and cloudflare_pass) and not unique_id:
             raise KeyError(
                 'Either cloudflare_email and cloudflare_pass or unique_id must be present')
-        params = {'act': 'user_lookup'}
+        params = {'act': 'user_auth'}
         if cloudflare_email and cloudflare_pass:
             params['cloudflare_email'] = cloudflare_email
             params['cloudflare_pass'] = cloudflare_pass
