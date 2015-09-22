@@ -6,7 +6,7 @@ packages = find_packages(exclude=['tests", "tests.*'])
 
 setup(
     name='pyflare',
-    version='1.1.4',
+    version='1.1.5',
     packages=packages,
     url='https://github.com/jlinn/pyflare',
     license='LICENSE.txt',
