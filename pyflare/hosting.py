@@ -152,7 +152,7 @@ class PyflareHosting(object):
         if cloudflare_email and cloudflare_pass:
             params['cloudflare_email'] = cloudflare_email
             params['cloudflare_pass'] = cloudflare_pass
-        else:
+        if unique_id:
             params['unique_id'] = unique_id
 
         return self._request(params)
